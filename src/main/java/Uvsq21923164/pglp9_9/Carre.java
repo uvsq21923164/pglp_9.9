@@ -1,8 +1,10 @@
 package Uvsq21923164.pglp9_9;
 
-public class Carre extends Forme {
+public class Carre extends Forme implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 	Point point;
 	int cote;
+	/* methodes get et set */
 	public Point getPoint() {
 		return point;
 	}
@@ -20,7 +22,7 @@ public class Carre extends Forme {
 	}
 
 
-
+/* Constructeur de la class*/
 	public Carre(String name,Point p,int cote) {
 		super(name);
 		point=p.copie();
