@@ -27,7 +27,7 @@ public class Point {
 
 	    }
 
-	    public void deplacer(int dx, int dy) {
+	    public void move(int dx, int dy) {
 
 	        x += dx;
 

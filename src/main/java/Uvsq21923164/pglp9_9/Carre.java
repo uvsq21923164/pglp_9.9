@@ -30,8 +30,8 @@ public class Carre extends Forme implements java.io.Serializable {
 	}
 
 	
-	public void deplacer(String name, int x, int y) {
-		point.deplacer(x, y);
+	public void move(String name, int x, int y) {
+		point.move(x, y);
 		
 	}
 

@@ -21,7 +21,7 @@ public abstract class Forme {
 	 public void setNom(String name) {
 			this.name= name;
 		}
-	 public abstract void deplacer(String name, int x, int y);
+	 public abstract void move(String name, int x, int y);
 	    /**
 	     * affichage de la forme.
 	     */
