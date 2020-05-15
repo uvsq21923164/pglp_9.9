@@ -9,7 +9,7 @@ public class trianglesTest {
 	@Test
 	public void test() {
 		triangles tr= new  triangles( "omar",new Point(0,1), new Point(2,3), new Point(4,5) );
-		tr.deplacer("omar",6,7);
+		tr.move("omar",6,7);
 		assertEquals(tr.getPoint1().getX(),6);
 		assertEquals(tr.getPoint1().getY(),8);
 		
