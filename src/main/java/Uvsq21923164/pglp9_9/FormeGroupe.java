@@ -2,8 +2,8 @@ package Uvsq21923164.pglp9_9;
 
 import java.util.ArrayList;
 
-public class FormeGroupe extends Forme{
-
+public class FormeGroupe extends Forme implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 	/**
      * la liste des formes.
      */
@@ -16,9 +16,9 @@ public class FormeGroupe extends Forme{
 
     
 	@Override
-	public void deplacer(String name, int x, int y) {
+	public void move(String name, int x, int y) {
 		 for (Forme forme : formes) {
-	            forme.deplacer(name,x, y);
+	            forme.move(name,x, y);
 	        }
 		
 	}
