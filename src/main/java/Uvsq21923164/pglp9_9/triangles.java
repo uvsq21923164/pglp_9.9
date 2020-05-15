@@ -1,7 +1,8 @@
 package Uvsq21923164.pglp9_9;
 
-public class triangles extends Forme {
+public class triangles extends Forme implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	Point point1,point2,point3;
     public Point getPoint1() {
 		return point1;
@@ -28,7 +29,7 @@ public class triangles extends Forme {
     	point3=p3.copie();
     }
 	@Override
-	public void deplacer(String name, int x, int y) {
+	public void move(String name, int x, int y) {
 		this.point1.setX(this.point1.getX() + x);
 		this.point1.setY(this.point1.getY() + y);
 		this.point2.setX(this.point2.getX() + x);
