@@ -1,7 +1,7 @@
 package Uvsq21923164.pglp9_9;
 
-public class Cercle extends Forme {
-
+public class Cercle extends Forme implements java.io.Serializable  {
+	private static final long serialVersionUID = 1L;
 	int rayon;
 	Point centre;
 	
@@ -23,8 +23,8 @@ public class Cercle extends Forme {
     	this.rayon=rayon;
     }
 	
-	public void deplacer(String name, int x, int y) {
-		centre.deplacer(x, y);
+	public void move(String name, int x, int y) {
+		centre.move(x, y);
 		
 	}
 
