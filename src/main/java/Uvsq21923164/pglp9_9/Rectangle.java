@@ -1,6 +1,8 @@
 package Uvsq21923164.pglp9_9;
 
-public class Rectangle extends Forme{
+public class Rectangle extends Forme implements java.io.Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	int largeur,longeur;
 	Point point;
 	public Point getPoint() {
@@ -32,9 +34,9 @@ public class Rectangle extends Forme{
 	    	
 	    }
 	@Override
-	public void deplacer(String name, int x, int y) {
+	public void move(String name, int x, int y) {
 		// TODO Auto-generated method stub
-		point.deplacer(x, y);
+		point.move(x, y);
 	}
 	@Override
 	public void affiche() {
