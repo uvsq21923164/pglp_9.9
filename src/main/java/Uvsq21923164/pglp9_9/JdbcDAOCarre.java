@@ -11,7 +11,7 @@ public class JdbcDAOCarre implements DAO<Carre> {
 	public Carre create(Carre obj) throws SQLException{
 		try (Connection connect = DriverManager.getConnection(dburl)) {
 			PreparedStatement prepare = connect.prepareStatement(
-					"INSERT  INTO Carre (NamCr, point_x, point_y, cote)" +
+					"INSERT  INTO Carre (NameCr, point_x, point_y, cote)" +
 					"VALUES (?, ?, ?, ?)");
 			prepare.setString(1, obj.getname());
 			prepare.setInt(2, obj.getPoint().getX());
@@ -34,14 +34,57 @@ public class JdbcDAOCarre implements DAO<Carre> {
 	@Override
 	public Carre update(Carre obj) {
 		// TODO Auto-generated method stub
-		return null;
+
+		try (Connection connect = DriverManager.getConnection(dburl)) {
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Carre WHERE Namecr = ?  ");
+			prepareFind.setString(1, obj.getname());
+			ResultSet res = prepareFind.executeQuery();
+			
+			if(!res.next()) {  System.out.println(""
+					+ "Le carre n'existe pas ");}
+			else {  
+			PreparedStatement prepare = connect.prepareStatement(
+					"UPDATE Carre SET point_x = ?, point_y =?, "
+			                + "cote =? WHERE Namecr = ? ");
+			prepare.setInt(1, obj.getPoint().getX());
+			prepare.setInt(2, obj.getPoint().getY());
+			prepare.setInt(3, obj.getCote());
+			prepare.setString(4, obj.getname());
+			int result = prepare.executeUpdate();
+			 assert result == 1;
+			System.out.println(result);}
+		}
+		catch (SQLException e) {
+			e.getMessage();
+		} 
+		
+		return obj;	
 	}
+	
 
 	@Override
 	public void delete(Carre obj) {
 		// TODO Auto-generated method stub
-		
+		try   (Connection connect = DriverManager.getConnection(dburl)){
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Carre WHERE Namecr = ?  ");
+			prepareFind.setString(1, obj.getname());
+			ResultSet res = prepareFind.executeQuery();
+			if(!res.next()) {  System.out.println(" le Carre n'exist pas ");}
+			else {
+				PreparedStatement prepare = connect.prepareStatement(
+						"DELETE FROM Carre "
+						+ "WHERE Namecr  = ?");
+				prepare.setString(1, obj.getname());
+				int result = prepare.executeUpdate();
+				assert result == 1;
+		}}
+		catch (SQLException e) {
+			e.getMessage();
+		}
 	}
+	
 
 	@Override
 	public Carre find(String id) throws SQLException {

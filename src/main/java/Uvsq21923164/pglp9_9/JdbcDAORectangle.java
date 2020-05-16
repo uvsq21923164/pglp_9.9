@@ -34,14 +34,56 @@ public class JdbcDAORectangle implements DAO<Rectangle> {
 	@Override
 	public Rectangle update(Rectangle obj) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		try (Connection connect = DriverManager.getConnection(dburl)) {
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Rectangle WHERE NameRc = ?  ");
+			prepareFind.setString(1, obj.getname());
+			ResultSet res = prepareFind.executeQuery();
+			
+			if(!res.next()) {  System.out.println(""
+					+ "Le Rectangle n'existe pas ");}
+			else {  
+				PreparedStatement prepare = connect.prepareStatement(
+						"UPDATE Rectangle SET point_x = ?, point_y = ?, "
+				                + "largeur = ?, longeur = ? WHERE NameRc = ?");
+				               
+				        		prepare.setInt(1, obj.getPoint().getX());
+				        		prepare.setInt(2, obj.getPoint().getY());
+				        		prepare.setInt(3, obj.getLargeur());
+				        		prepare.setInt(4, obj.getLongeur());
+				        		prepare.setString(5, obj.getname());
+				int result = prepare.executeUpdate();
+				assert result == 1;}
+			}
+			catch (SQLException e) {
+				e.getMessage();
+			}
+			return obj;	
+		}
+	
 
 	@Override
 	public void delete(Rectangle obj) {
 		// TODO Auto-generated method stub
-		
+		try   (Connection connect = DriverManager.getConnection(dburl)){
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Rectangle WHERE NameRc = ?  ");
+			prepareFind.setString(1, obj.getname());
+			ResultSet res = prepareFind.executeQuery();
+			if(!res.next()) {  System.out.println(" le rectangle n'exist pas ");}
+			else {
+				PreparedStatement prepare = connect.prepareStatement(
+						"DELETE FROM rectangle "
+						+ "WHERE NameRc = ?");
+				prepare.setString(1, obj.getname());
+				int result = prepare.executeUpdate();
+				assert result == 1;
+		}}
+		catch (SQLException e) {
+			e.getMessage();
+		}
 	}
+	
 
 	@Override
 	public Rectangle find(String id) throws SQLException {
