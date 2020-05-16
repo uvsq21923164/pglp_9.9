@@ -29,7 +29,7 @@ public class Creationdb {
 			    ResultSet resultCARRE = databaseMetadata.getTables(null, null, "CARRE", null);
 			    
 			    if (resultCARRE.next()) {
-			    	throw new TableExisteDeja("TABLE ALREADY EXISTS");
+			    	throw new TableExisteDeja("TABLE EXISTE TOUJOURS");
 			    } else {
 			
 			state.addBatch(
@@ -48,7 +48,7 @@ public class Creationdb {
 			    ResultSet resultRectangle = databaseMetadata.getTables(null, null, "RECTANGLE", null);
 			    
 			    if (resultRectangle.next()) {
-			    	throw new TableExisteDeja("TABLE ALREADY EXISTS");
+			    	throw new TableExisteDeja("TABLE EXISTE TOUJOURS");
 			    } else {
 			
 			state.addBatch(
@@ -67,7 +67,7 @@ public class Creationdb {
 			    ResultSet resultTriangle = databaseMetadata.getTables(null, null, "TRIANGLE", null);
 			    
 			    if (resultTriangle.next()) {
-			    	throw new TableExisteDeja("TABLE ALREADY EXISTS");
+			    	throw new TableExisteDeja("TABLE EXISTE TOUJOURS");
 			    } else {
 			
 			state.addBatch(
@@ -88,7 +88,7 @@ public class Creationdb {
 			    ResultSet resultCercle = databaseMetadata.getTables(null, null, "CERCLE", null);
 			    
 			    if (resultCercle.next()) {
-			    	throw new TableExisteDeja("TABLE ALREADY EXISTS");
+			    	throw new TableExisteDeja("TABLE EXISTE TOUJOURS");
 			    } else {
 			
 			state.addBatch(
@@ -111,7 +111,7 @@ public class Creationdb {
 						+ ")");}
 			    ResultSet res = databaseMetadata.getTables(null, null, "APPARTENIR", null);
 			    if (res.next()) {
-			    	throw new TableExisteDeja("TABLE ALREADY EXISTS");
+			    	throw new TableExisteDeja("TABLE EXISTE TOUJOURS");
 			    } else {
 				state.addBatch( 
 						"CREATE TABLE appartenir("
