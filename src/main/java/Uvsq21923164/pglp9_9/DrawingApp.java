@@ -13,16 +13,14 @@ public class DrawingApp {
    
     
     DrawingTUI d;
-	/**
-	 * constructeur 
-	 */
+	
 	public DrawingApp(){
 		d = new DrawingTUI();
         scanner = new Scanner(System.in);
 	}
 	
 	  public void run() throws SQLException {
-	        System.out.print("Taper Q pour afficher la liste des actions ou quit pour quitter\n>");
+	        System.out.print(" veuillez Taper Q pour afficher la liste des actions ou quit pour quitter\n>");
 	        String cmd = scanner.nextLine();
 	        Commande c;
 	        while (!cmd.equals("quit")) {
