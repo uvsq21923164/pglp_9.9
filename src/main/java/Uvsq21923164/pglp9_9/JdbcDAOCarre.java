@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 public class JdbcDAOCarre implements DAO<Carre> {
 
 	private static String dburl =Creationdb.dburl;
@@ -88,6 +89,37 @@ public class JdbcDAOCarre implements DAO<Carre> {
 
 	@Override
 	public Carre find(String id) throws SQLException {
+		Carre cr= null;
+		try   (Connection connect = DriverManager.getConnection(dburl)){
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Carre WHERE Namecr = ?  ");
+			prepareFind.setString(1, id);
+	            ResultSet result = prepareFind.executeQuery();
+	            if (result.next()) {
+	            	 Point point = new Point(
+	                        result.getInt("point_x"),
+	                        result.getInt("point_y"));
+	                try {
+	                	cr = new Carre(id,point,result.getInt("cote"));
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                    return null;
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	        return cr;
+		
+	}
+
+
+
+
+
+	@Override
+	public ArrayList<Carre> show() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class JdbcDAOtriangle implements DAO<triangles> {
 
@@ -38,9 +39,36 @@ public class JdbcDAOtriangle implements DAO<triangles> {
 
 	@Override
 	public triangles find(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		triangles trgl= null;
+		try  (Connection connect = DriverManager.getConnection(dburl)){
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Triangle WHERE NameTr = ?  ");
+			prepareFind.setString(1,id);
+			ResultSet res = prepareFind.executeQuery();
+            if (res.next()) {
+                Point p1 = new Point(
+                        res.getInt("point1_x"),
+                        res.getInt("point1_y"));
+                Point p2 = new Point(
+                        res.getInt("point2_x"),
+                        res.getInt("point2_y"));
+                Point p3 = new Point(
+                        res.getInt("point3_x"),
+                        res.getInt("point3_y"));
+                try {
+                	trgl = new triangles(id,p1,p2,p3);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return trgl;
 	}
+	
 
 	@Override
 	public triangles update(triangles obj) {
@@ -98,6 +126,16 @@ public class JdbcDAOtriangle implements DAO<triangles> {
 		catch (SQLException e) {
 			e.getMessage();
 		}
+	}
+
+
+
+
+
+	@Override
+	public ArrayList<triangles> show() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

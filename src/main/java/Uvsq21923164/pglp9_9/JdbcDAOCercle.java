@@ -4,12 +4,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 
 public class JdbcDAOCercle implements DAO<Cercle> {
 	private static String dburl = Creationdb.dburl;
-	@Override
+	
 	public Cercle create(Cercle obj) throws SQLException {
 			try (Connection connect = DriverManager.getConnection(dburl)) {
 				PreparedStatement prepare = connect.prepareStatement(
@@ -88,19 +89,50 @@ public class JdbcDAOCercle implements DAO<Cercle> {
 	@Override
 	public Cercle find(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		Cercle crl= null;
+       
+
+        	try   (Connection connect = DriverManager.getConnection(dburl)){
+        		PreparedStatement prepareFind = connect.prepareStatement(
+        				"SELECT * FROM Cercle WHERE Namecrl = ?  ");
+            prepareFind.setString(1, id);
+            ResultSet res = prepareFind.executeQuery();
+            if (res.next()) {
+                Point centre = new Point(
+                        res.getInt("centre_x"),
+                        res.getInt("centre_y"));
+                try {
+                    crl = new Cercle(id,centre,res.getInt("rayon"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        	
+        	
+        return crl;
+
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+        }
+
+
+	@Override
+	public ArrayList<Cercle> show() {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 	
 	
 }
+	
+	
+	
+	
+	
+	
+

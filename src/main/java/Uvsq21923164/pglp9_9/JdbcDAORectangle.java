@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class JdbcDAORectangle implements DAO<Rectangle> {
 
@@ -88,39 +89,37 @@ public class JdbcDAORectangle implements DAO<Rectangle> {
 	@Override
 	public Rectangle find(String id) throws SQLException {
 		// TODO Auto-generated method stub
+		Rectangle rtgl= null;
+		try   (Connection connect = DriverManager.getConnection(dburl)){
+			PreparedStatement prepareFind = connect.prepareStatement(
+					"SELECT * FROM Rectangle WHERE NameRc = ?  ");
+			prepareFind.setString(1, id);
+            ResultSet res = prepareFind.executeQuery();
+            if (res.next()) {
+                Point p = new Point(
+                        res.getInt("point_x"),
+                        res.getInt("point_y"));
+                try {
+                	rtgl = new Rectangle(id,p,res.getInt("largeur"),res.getInt("longeur"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return rtgl;
+	}
+
+
+	@Override
+	public ArrayList<Rectangle> show() {
+		// TODO Auto-generated method stub
 		return null;
+	}
 	}
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
