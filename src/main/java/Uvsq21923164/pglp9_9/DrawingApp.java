@@ -13,7 +13,11 @@ public class DrawingApp {
    
     
     DrawingTUI d;
-	
+    public static void main(final String[] args) throws Exception {
+	       
+        DrawingApp app = new DrawingApp();
+        app.run();
+    }
 	public DrawingApp(){
 		d = new DrawingTUI();
         scanner = new Scanner(System.in);
@@ -36,10 +40,6 @@ public class DrawingApp {
 
 
 	    
-	    public static void main(final String[] args) throws Exception {
-	       
-	        DrawingApp app = new DrawingApp();
-	        app.run();
-	    }
+	    
 }
 
