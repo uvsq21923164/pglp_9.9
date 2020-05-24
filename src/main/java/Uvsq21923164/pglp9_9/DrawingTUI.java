@@ -241,7 +241,7 @@ public class DrawingTUI {
         split[1] = split[1].substring(1, split[1].length() - 1);
         split = split[1].split(",");
         if (split.length != trois) {
-            System.err.println("Commande invalide, "
+            System.err.println("Commande incorrecte, "
                     + split.length + "/" + trois + " arguments");
         } else {
             String variable;
@@ -254,7 +254,7 @@ public class DrawingTUI {
                     return new DeplacementCommand(f, deplacement);
                 }
             } catch (Exception e) {
-                System.err.println("Commande invalide");
+                System.err.println("Commande incorrecte");
                 e.printStackTrace();
             }
         }
